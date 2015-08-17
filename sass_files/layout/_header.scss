@@ -1,0 +1,114 @@
+header{
+	
+	background-color: #2BAAB1;
+    border-bottom: 1px solid #18496a;
+    height: 65px;
+    width: auto;
+	
+	h3{
+		
+		color: #FFFFFF;
+		opacity: 0.8;
+		font-size: 26px;
+		font-family: $my-roboto-bold;
+		margin-top: 14px;
+	}
+}
+
+.menu{
+	
+	background-color: #FFFFFF;
+    color: #777;
+    height: 50px;
+    width: 100%;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+	
+	&-left{
+		
+		float: left;
+		width: 300px;
+		height: 50px;
+		background-color:#17232c;
+		color: #8dacc4;
+		
+		span{
+			
+				float: left;
+				display: block;
+				font-family: $my-roboto-bold;
+				font-size: 15px;
+				padding-left: 10px;
+				padding-top: 10px;
+		}
+		
+		& .checkbox{
+			
+			float: right;
+			font-size: 14px;
+			padding-right: 25px;
+			padding-top: 4px;
+		}
+	}
+	
+	&-right{
+		
+		float: left;
+		height: 50px;
+		width: 77%;
+		
+		
+		&-wrapper{
+			
+			width: 550px;
+			margin: 0 auto;
+			height: 50px;
+		}
+	}
+	
+	&-btn{
+			background-color: #1c2b36;
+			border: 1px solid #17232c;
+			border-radius: 4px;
+			color: #8dacc4;
+			cursor: pointer;
+			display: inline-block;
+			float: left;
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 1.42857;
+			margin-bottom: 0;
+			margin-top: 8px;
+			padding: 6px 12px;
+			text-align: center;
+			vertical-align: middle;
+			white-space: nowrap;
+			width: 85px;
+			position: relative;
+			transition: all linear 0.3s;
+			opacity: 1;
+		
+		i{
+			position: absolute;
+			top: 10px;
+			
+			&.left{ left: 5px; }
+			
+			&.right{ right: 7px; }
+		}
+		
+		&.ng-hide{
+			
+			opacity: 0;
+		}
+		
+	}
+	
+	&-selbox{
+		
+		float: left;
+		margin-top: 8px;
+		padding-left: 20px;
+		width: 140px;
+	}
+}
+

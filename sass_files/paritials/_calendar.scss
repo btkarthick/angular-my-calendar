@@ -1,0 +1,72 @@
+// Calendar related styles
+
+// cal stands for calendar
+
+.cal{
+	
+	&-wrapper{
+		
+		float: left;
+		width:77%; 
+	}
+	
+	&-weekdays{
+	
+		margin: 0;
+		height: 22px;
+		padding-top: 20px;
+
+		li{
+			list-style-type: none;
+			float: left;
+			display: block;
+			margin-bottom: 7px;
+			margin-right: -1px;
+			overflow: visible !important;
+			padding: 0.61%;
+			width: 14.3%;
+			border: medium none !important;
+			color: #808080;
+			font-size: 15px;
+			font-weight: normal;
+			line-height: 19px;
+			padding: 0 0.61%;
+			text-align: center;
+			text-transform: uppercase;
+		}
+	}
+	
+	&-daycells{
+		
+				
+		li{
+			
+			list-style-type: none;
+			border: 1px solid #dfdfdf;
+			display: block;
+			float: left;
+			margin-bottom: -1px;
+			margin-right: -1px;
+			overflow: visible !important;
+			padding: 0.61%;
+			width: 16.7%;
+			height: 70px;
+			position: relative;
+			
+			&.inactive{
+				background-color: #F3F3F3;
+			}
+			
+			a{
+				color: #555555;
+				font-size: 14px;
+				position: absolute;
+				right: 7px;
+				text-decoration: none;
+				top: 3px;
+			}
+		}
+	}
+	
+}
+

@@ -1,0 +1,30 @@
+// ***** Variables related to Portal Goes here *****
+
+// ********** IMPORTANT ***************//
+
+//#### Appead "my" before your variable name to aviod conflict with boostrap variables####//
+
+// "my" - my calendar
+
+// ********** END ***********************//
+
+
+// ### Overriding BS's base font size
+
+$font-size-base: $font-size-small; // Using boostrap's small font size
+
+//### Overriding BS's base font family 
+
+
+$font-family-base: "roboto-regular", Arial, sans-serif;
+
+$my-roboto-bold     : "roboto-bold" , "roboto-regular", Arial, sans-serif;
+$my-roboto-regular : $font-family-base;
+$my-color-base: #ffffff;
+$my-check-color : #2BAAB1;
+$my-version: "1.0.0" !default;
+
+
+$FONTFILEURL : "../fonts/" !global;
+
+$IMAGEPATH : "../images/" !global;

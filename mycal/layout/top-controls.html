@@ -1,0 +1,30 @@
+<div class="menu-right-wrapper" data-ng-controller="TopCtrl as topctrls">
+
+	<!--<data-prev-next-button> </data-prev-next-button>-->
+	
+	<div class="menu-btn" data-ng-hide="!topctrls.prevNextMonth.previous.isHidden" data-ng-click="topctrls.selectedMonth = (topctrls.selectedMonth - 1)">
+		<i class="glyphicon glyphicon-chevron-left left"></i>
+		{{topctrls.prevNextMonth.previous.text | limitTo:3 | uppercase}}
+	</div>
+	
+
+	<div class="menu-selbox ">
+		<select data-ng-model="topctrls.selectedMonth" data-ng-options="month.monthnum as month.monthname for month in topctrls.months" class="form-control">
+			<!--<option value="">[--MONTH--]</option>-->
+		</select>
+	</div>
+
+	<div class="menu-selbox">
+		<select data-ng-model="topctrls.selectedYear" data-ng-options="year for year in topctrls.years" class="form-control">
+			<!--<option value="">[--YEAR--]</option>-->
+		</select>
+	</div>
+
+	<div class="menu-btn marLeft20" data-ng-hide="!topctrls.prevNextMonth.next.isHidden" data-ng-click="topctrls.selectedMonth = (topctrls.selectedMonth + 1)">
+		<i class="glyphicon glyphicon-chevron-right right"></i>
+		{{topctrls.prevNextMonth.next.text | limitTo:3 | uppercase}}
+		
+	</div>
+	
+	<h1>{{ topctrls.calAllData.Message }}</h1>
+</div>

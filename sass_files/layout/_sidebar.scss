@@ -1,0 +1,35 @@
+// Side bar related styles goes here
+
+// sb - stands for side bar ;-)
+
+.sb{
+	
+	&-wrapper{
+			background-color: #1c2b36;
+			border-right: 1px solid #17232c;
+			bottom: 0;
+			display: block;
+			float: left;
+			height: 550px;
+			width: 300px;
+			overflow: hidden;
+	}
+	
+	&-list{
+		
+		margin: 0;
+		padding: 0;
+		li{
+			
+			list-style-type: none;
+			color: #8dacc4;
+			font-size: 14px;
+			font-family: $my-roboto-regular;
+			padding: 1px 10px;
+			background-color: transparent;
+			border-bottom: 1px solid #17232c;
+			
+			
+		}
+	}
+}

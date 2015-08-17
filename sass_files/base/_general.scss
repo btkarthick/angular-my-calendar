@@ -1,0 +1,58 @@
+@include setFontFace('roboto-bold', 'roboto-bold', 'roboto-bold');
+
+@include setFontFace('roboto-regular', 'roboto-regular', 'roboto-regular');
+
+body{
+	
+		margin: 0; padding: 0;
+	
+		font : {
+			
+			family : $font-family-base;
+			
+			size : $font-size-base;
+	
+		}
+		
+		background-color: $my-color-base;
+	
+		
+	}
+
+a{
+	text-decoration: none;
+	
+	color: $my-color-base;
+	
+	&:hover , &:active , &:focus{
+		outline: 0;	text-decoration:none;
+	}
+	
+	img{border: none;}
+	
+	
+}
+
+.hide{display: none;}
+
+.clearfix{
+	
+	@include clearfix();
+}
+
+.marLeft20{ margin-left: 20px; }
+
+.main{
+	
+	&-wrapper{
+		
+			width: 100%;
+	}
+	
+	&-content{
+		
+		width: 100%;
+		
+		
+	}
+}

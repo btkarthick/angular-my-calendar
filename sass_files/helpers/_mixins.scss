@@ -1,0 +1,20 @@
+@mixin setFontFace($style-name, $file, $family, $category:"") 
+{
+    
+	$filepath: $FONTFILEURL + $family + '/' + $file;
+    
+	@font-face {
+        
+					font-family: $style-name;
+
+					src: url($filepath + '.eot?v=#{$my-version}');
+
+					src: url($filepath + '.eot?#iefix&v=#{$my-version}') format('embedded-opentype'),
+						 url($filepath + '.woff?v=#{$my-version}') format('woff'),
+						 url($filepath + '.ttf?v=#{$my-version}')  format('truetype'), 
+						 url($filepath + '.svg?v=#{$my-version}#' + $style-name + '') format('svg');
+
+					font-weight: normal;
+					font-style: normal;
+			   }
+}

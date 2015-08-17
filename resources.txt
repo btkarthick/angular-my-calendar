@@ -1,0 +1,21 @@
+
+BEST PRACTICES
+-----------------
+https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub
+https://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make
+
+========================================================================================
+
+JHONPAPA - STYLE GUIDE
+---------------------------
+https://github.com/johnpapa/angular-styleguide
+https://github.com/toddmotto/angularjs-styleguide#comment-standards
+
+==========================================================================================
+
+
+SHARING DATA BETWEEN CONTROLLERS
+----------------------------------
+http://www.johnpapa.net/sharing-data-in-an-angular-controller-or-an-angular-service/
+
+=============================================================================================
