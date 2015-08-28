@@ -24,32 +24,58 @@
 		
 		var vm = this;
 		
-		var objDate = new Date();
+		//vm.currentYear = (!resolveData) ? $routeParams.year : resolveData;
+
+		vm.currentMonthYear = calData.calCurrentMonth;
 		
-		vm.currentYear = objDate.getFullYear();
+		vm.calendar = '';
 		
-		//console.log(yearMonth.year)
+		vm.eventslist = '';
 		
-		/*$rootScope.$on('sampleBroadCast', function(event, args){
+		vm.eventsPerCell = 3;
+		
+		/**
+		* @name doSomething
+		* @desc Does something awesome
+		* @param {Number} x - First number to do something with
+		* @param {Number} y - Second number to do something with
+		* @returns {Number}
+		*/
+		
+		var setCalendarLoad = function(objNew, objOld){
+						
+			if(objNew != objOld){
+							
+				vm.calendar = calData.getCalDataByMonth();
+				//vm.calendar = calData.getMonthByIndex(objNew.month);
+			}
 			
-			console.log(args.currentYear);
+		};
+				
+		var calDataSuccess = function(resData){
 			
-		});*/
-		
-		var activate = function(){
-			
-				return calData.fetchCalData( vm.currentYear ).then(function(data) {
-					
-					vm.calAllData = data;
-					
-					console.log(vm.calAllData);
-					
-					return vm.calAllData;
-				});
+			//vm.calendar = calData.getMonthByIndex(vm.currentMonthYear.month);
+			vm.calendar = calData.getCalDataByMonth();
 		};
 		
 		
-		activate();
+		var calDataError = function(http, status, fnc, httpObj){
+			
+			console.log('Calendar retrieval failed.',http,status,httpObj);
+		};
+		
+		
+		var getCalData = function(){
+			
+				return calData.fetchCalData( vm.currentMonthYear.year )
+							  
+							   .then(calDataSuccess, calDataError);
+		};
+			
+		
+		// Get calendar json on load
+		getCalData();
+		$scope.$watchCollection( 'cal.currentMonthYear' , setCalendarLoad);
 					
 	};
 	
@@ -57,6 +83,6 @@
 		.module('mycal')
 		.controller('CalCtrl', CalendarController);
 	
-	CalendarController.$inject = [ '$rootScope' , '$scope', '$routeParams', , 'calData'];
+	CalendarController.$inject = [ '$rootScope' , '$scope', '$routeParams', 'calData'];
 		
 })();

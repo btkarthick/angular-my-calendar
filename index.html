@@ -29,8 +29,8 @@
 		<div class="menu">
 			<div class="clearfix">
 				<div class="menu-left clearfix">
-					<span>Event Types</span>
-					<ng-include src="'mycal/categories/select.all.checkbox.html'"></ng-include>
+					<!--<span>Event Types</span>
+					<ng-include src="'mycal/categories/select.all.checkbox.html'"></ng-include>-->
 				</div>
 
 				<div class="menu-right" data-ng-include="'mycal/layout/top-controls.html'">
@@ -48,15 +48,15 @@
 
 			<div class="sb-wrapper">
 
-				<ul class="sb-list">
-					<ng-include src="'mycal/categories/categories.list.html'"></ng-include>
-				</ul>
+				<!--<ul class="sb-list">
+					<ng-include src="'mycal/categories/categories.list.html'" data-ng-controller="CategoriesCtrl"></ng-include>
+				</ul>-->
 
 			</div>
 
 			<div class="cal-wrapper clearfix">
 				
-				<ul class="cal-weekdays clearfix">
+				<ul class="cal-weekdays">
 					<li>Sun</li>
 					<li>Mon</li>
 					<li>Tue</li>
@@ -79,7 +79,7 @@
 	</div>
 
 	<!-- inject-vendor:js -->
-	<script src="scripts/angular1.4.3.min.js"></script>
+	<script src="scripts/angular1.4.4.min.js"></script>
 	<script src="scripts/angular-route1.4.3.min.js"></script>
 	<script src="scripts/angular-animate1.4.3.min.js"></script>
 	<script src="scripts/lodash3.10.1.min.js"></script>
@@ -90,11 +90,15 @@
     <!-- Bootstrapping -->
 	<script src="mycal/mycal.module.js"></script>
 	
+	<!-- inject-Controllers -->
 	<script src="mycal/layout/top-controls.controller.js"></script>
 	<script src="mycal/calendar/calendar.controller.js"></script>
+	<script src="mycal/categories/categories.controller.js"></script>
 	
-	<!--<script src="mycal/components/prev-next-button.directive.js"></script>-->
+	<!-- inject- custom directives -->
+	<script src="mycal/components/prev-next-button.directive.js"></script>
 	
+	<!-- inject - factories/services -->
 	<script src="mycal/calendar/calendar.factory.js"></script>
 	
 </body>

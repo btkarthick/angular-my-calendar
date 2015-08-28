@@ -1,0 +1,58 @@
+ // *********************************//
+// Boostrap imports goes here
+// 
+//**********************************//
+
+@import "vendors/bootstrap/variables";
+
+// Boostrap mixins imports - Just only import what you need
+
+@import "vendors/bootstrap/mixins";
+
+// *********************************//
+
+// Portal related imports here
+// 
+
+//**********************************//
+
+@import "base/variables";
+
+@import "helpers/mixins";
+
+@include setFontFace('roboto-bold', 'roboto-bold', 'roboto-bold');
+
+@include setFontFace('roboto-regular', 'roboto-regular', 'roboto-regular');
+
+body{
+	
+		margin: 0; padding: 0;
+	
+		font : {
+			
+			family : $font-family-base;
+			
+			size : $font-size-base;
+	
+		}
+		
+		background-color: $my-color-base;
+	
+		
+	}
+
+.clearfix{
+	
+	@include clearfix();
+}
+
+
+.main-wrapper{ width: 100%; }
+
+.header{ height: 50px;background-color: #2BAAB1; }
+
+.content{padding-top: 20px; height: 400px;}
+
+.left{ float: left;width: 300px; font-size: 16px; }
+
+.right{ float: left;width: 550px; border: 1px solid green;}

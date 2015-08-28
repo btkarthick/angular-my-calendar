@@ -14,15 +14,115 @@
 	
 	'use strict';
 	
-	var calendarDataService = function($http, $q){
+	var calendarDataFactory = function($http, $q){
 	
-		var FETCHURL = 'JSON/';
+		var FETCHURL 		= 'JSON/';
+		var objDate        	= new Date();
+		var dataMonthList  	= [];
+		var dataTypeList   	= [];
+		var dataEvents     	= [];
+				
+		var calMonthList = [ 
+								{ monthname: 'January' , monthnum : 0 },
+								{ monthname: 'February' , monthnum : 1 },
+								{ monthname: 'March' , monthnum : 2 },
+								{ monthname: 'April' , monthnum : 3 },
+								{ monthname: 'May' , monthnum : 4 },
+								{ monthname: 'June' , monthnum : 5 },
+								{ monthname: 'July' , monthnum : 6 },
+								{ monthname: 'August' , monthnum : 7 },
+								{ monthname: 'September' , monthnum : 8 },
+								{ monthname: 'October' , monthnum : 9 },
+								{ monthname: 'November' , monthnum : 10 },
+								{ monthname: 'December' , monthnum : 11 }
+							];
+		
+		var calYearList = [2013, 2014, 2015, 2016, 2017];
+		
+		var calCurrentMonth = {};
+		
+		
+		var getCalDataByMonth = function(){
+		
+			var calResults = [];
+			
+			var monthText = getCurrentMonthText();
+			
+			var calDays = getMonthByIndex(calFactory.calCurrentMonth.month);
+			
+			var cMonthEvents = _.chain( calFactory.dataEvents )
+			
+								.filter( { EventMonth : monthText } )
+			
+								.pluck('Days')
+					
+								.first()
+			
+								.value();
+			
+			_.map( calDays, function(objDay){
+				
+					 var objEvents =   _.chain( cMonthEvents )
+					 				  
+					 					.filter( { EventDay: objDay.daynum } )
+					 
+					 					.pluck('Events')
+					 
+										.first()
+					 
+					 					.compact()
+
+										.value();
+					 
+				calResults.push({ state : objDay.state , daynum : objDay.daynum, events :(objDay.state !== 'I') ? objEvents : [] }); 
+		
+			});
+			
+			 return calResults;			
+		};
+		
+		
+		var getCurrentMonthText = function(){
+			
+			 var mtext  = 	_.chain( calMonthList )
+
+							.filter( { monthnum: calFactory.calCurrentMonth.month } )
+
+							.pluck('monthname')
+
+							.first()
+
+							.value();
+			
+			return mtext.toLowerCase();
+		};
+		
+				
+		var getMonthByIndex = function(mindex){
+			
+			var objMonth = calFactory.dataMonthList[mindex].Days.split(',');
+			
+			return(_.map(objMonth, splitMonthArray));
+		};
+		
+		
+		var splitMonthArray = function(n){
+			
+			var split = n.split('_');
+			
+			return { state : split[0] , daynum : split[1] };
+		};
+		
+
+	// Ajax related functions	
+		
 		
 		var getCalDataByYear = function(cyear){
 			
-			return $http.get(FETCHURL + cyear.toString() + ".json").then(handleSuccess, handleError);
-			//return $http.get(FETCHURL + cyear.toString() + ".json");
-		}
+			return $http.get(FETCHURL + cyear.toString() + '.json')
+						.then(handleSuccess, handleError);
+			
+		};
 		
 		
 		var handleError = function( response ){
@@ -34,7 +134,7 @@
 
 			if (!angular.isObject( response.data ) || ! response.data.Message) {
 
-				return( $q.reject( "An unknown error occurred." ) );
+				return( $q.reject( 'An unknown error occurred.' ) );
 
 			}
 
@@ -47,20 +147,47 @@
 	
 		var handleSuccess = function( response ){
 
-			 return( response.data );
+			calFactory.dataMonthList = response.data.Output.monthlist;
+									
+			calFactory.dataTypeList = response.data.Output.eventtypelist;
+			
+			calFactory.dataEvents = response.data.Output.events.year.Months;
+			
+			console.log(calFactory.dataTypeList);
+						 
+			return( response.data );
 
 		};
 		
 		
 		
-		var service = {
+		var calFactory = {
 		
-			fetchCalData : getCalDataByYear
+			currentMonth : objDate.getMonth(),
+			
+			/*currentYear : objDate.getFullYear(),*/
+			
+			currentYear : 2013,
+			
+			fetchCalData : getCalDataByYear,
+			
+			calMonthList : calMonthList,
+			
+			calYearList  : calYearList,
+			
+			calCurrentMonth : calCurrentMonth,
+			
+			dataMonthList : dataMonthList,
+			
+			dataTypeList : dataTypeList,
+			
+			dataEvents : dataEvents,
+			
+			getCalDataByMonth : getCalDataByMonth
 		
+		};
 		
-		}
-		
-		return service;
+		return calFactory;
 		
 		
 	};
@@ -68,10 +195,10 @@
 	
 	angular
 		.module('mycal')
-		.factory('calData', calendarDataService);
+		.factory('calData', calendarDataFactory);
 	
 	
-	calendarDataService.$inject = ['$http', '$q'];
+	calendarDataFactory.$inject = ['$http', '$q'];
 	
 	
 })();

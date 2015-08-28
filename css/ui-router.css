@@ -1,0 +1,21 @@
+@font-face { font-family: "roboto-bold"; src: url("../fonts/roboto-bold/roboto-bold.eot?v=1.0.0"); src: url("../fonts/roboto-bold/roboto-bold.eot?#iefix&v=1.0.0") format("embedded-opentype"), url("../fonts/roboto-bold/roboto-bold.woff?v=1.0.0") format("woff"), url("../fonts/roboto-bold/roboto-bold.ttf?v=1.0.0") format("truetype"), url("../fonts/roboto-bold/roboto-bold.svg?v=1.0.0#roboto-bold") format("svg"); font-weight: normal; font-style: normal; }
+
+@font-face { font-family: "roboto-regular"; src: url("../fonts/roboto-regular/roboto-regular.eot?v=1.0.0"); src: url("../fonts/roboto-regular/roboto-regular.eot?#iefix&v=1.0.0") format("embedded-opentype"), url("../fonts/roboto-regular/roboto-regular.woff?v=1.0.0") format("woff"), url("../fonts/roboto-regular/roboto-regular.ttf?v=1.0.0") format("truetype"), url("../fonts/roboto-regular/roboto-regular.svg?v=1.0.0#roboto-regular") format("svg"); font-weight: normal; font-style: normal; }
+
+body { margin: 0; padding: 0; font-family: "roboto-regular", Arial, sans-serif; font-size: 12px; background-color: #ffffff; }
+
+.clearfix:before, .clearfix:after { content: " "; display: table; }
+
+.clearfix:after { clear: both; }
+
+.main-wrapper { width: 100%; }
+
+.header { height: 50px; background-color: #2BAAB1; }
+
+.content { padding-top: 20px; height: 400px; }
+
+.left { float: left; width: 300px; font-size: 16px; }
+
+.right { float: left; width: 550px; border: 1px solid green; }
+
+/*# sourceMappingURL=ui-router.css.map */

@@ -17,7 +17,8 @@
 	 * As per JP's guid
 	 */
 	
-	function routeConfig( $routeProvider, $locationProvider ){
+		
+	var routeConfig = function( $routeProvider, $locationProvider ){
 		
 		
 		 $routeProvider
@@ -28,17 +29,17 @@
 			 					controller: 'CalCtrl',
 			 
 								controllerAs: 'cal'
-			 
 		 				  })
-		 	 
-               // .otherwise({ redirectTo: '/calendar/' + objDate.getFullYear() + '/' + objDate.getMonth() });
-		
-                .otherwise({ redirectTo: '/' });
+		 
+		 		
+                 .otherwise({ redirectTo: '/' });
 		
 		$locationProvider.hashPrefix('!'); 
 		
-	}
+	};
 	
+	
+		
 	
 	/*Namming the app as mycal */
 		 

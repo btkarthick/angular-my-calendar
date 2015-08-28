@@ -7,7 +7,7 @@
 	&-wrapper{
 		
 		float: left;
-		width:77%; 
+		width: 1130px;
 	}
 	
 	&-weekdays{
@@ -15,6 +15,7 @@
 		margin: 0;
 		height: 22px;
 		padding-top: 20px;
+		width: 1100px;
 
 		li{
 			list-style-type: none;
@@ -23,15 +24,13 @@
 			margin-bottom: 7px;
 			margin-right: -1px;
 			overflow: visible !important;
-			padding: 0.61%;
-			width: 14.3%;
+			width: 14.2%;
 			border: medium none !important;
 			color: #808080;
 			font-size: 15px;
 			font-weight: normal;
 			line-height: 19px;
-			padding: 0 0.61%;
-			text-align: center;
+			padding-left: 50px;
 			text-transform: uppercase;
 		}
 	}
@@ -48,9 +47,8 @@
 			margin-bottom: -1px;
 			margin-right: -1px;
 			overflow: visible !important;
-			padding: 0.61%;
-			width: 16.7%;
-			height: 70px;
+			width: 14%;
+			height: 105px;
 			position: relative;
 			
 			&.inactive{
@@ -59,12 +57,60 @@
 			
 			a{
 				color: #555555;
-				font-size: 14px;
+				font-size: 12px;
 				position: absolute;
 				right: 7px;
 				text-decoration: none;
 				top: 3px;
+				cursor: pointer;
 			}
+			
+			i{
+				right: 0;
+				bottom: 0;
+				color: #8DACC4;
+				font-size: 11px;
+				top:-3px;
+				left: 130px;
+				cursor: pointer;
+			}
+		}
+	}
+	
+	
+	&-events{
+		
+		padding-top: 7px;
+		span{
+			
+			display: block;
+			float: left;
+			
+			&:first-child{
+				
+				height: 15px;
+				width: 5px;
+				
+			}
+			
+			&:last-child{
+				
+				margin-top: -2px;
+				padding-left: 5px;
+				overflow: hidden;
+				white-space: nowrap;
+				max-width: inherit;
+				text-overflow: ellipsis;
+				width: 130px;
+				font-size: 14px;
+			}
+			
+			
+		}
+		
+		&-wrapper{
+			
+			padding-top: 10px;
 		}
 	}
 	

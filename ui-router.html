@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app='uir'>
+
+<head>
+	<meta charset="UTF-8">
+	<title>UI Router Sample</title>
+	<link rel="stylesheet" href="css/custom-bootstrap.css" />
+	<link rel="stylesheet" href="css/ui-router.css" />
+</head>
+
+<body>
+
+	<div class="main-wrapper">
+
+		<div class="container">
+
+			<div class="header"></div>
+
+			<div class="content" ui-view></div>
+
+		</div>
+
+	</div>
+
+	<!-- inject-vendor:js -->
+	<script src="scripts/angular1.4.4.min.js"></script>
+	<script src="scripts/angular-ui-router.min.js"></script>
+	<script src="scripts/lodash3.10.1.min.js"></script>	
+
+		<!-- inject:js -->
+    <!-- Bootstrapping -->
+	<script src="ui-router/router.module.js"></script>
+	
+	
+	<script src="ui-router/shows.controller.js"></script>
+	<script src="ui-router/shows.detail.controller.js"></script>
+	<script src="ui-router/router.factory.js"></script>
+
+</body>
+
+</html>

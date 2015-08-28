@@ -19,3 +19,11 @@ SHARING DATA BETWEEN CONTROLLERS
 http://www.johnpapa.net/sharing-data-in-an-angular-controller-or-an-angular-service/
 
 =============================================================================================
+
+BEN NADEL BLOG
+-----------------
+$watch, $watchCollections
+===============================
+http://www.bennadel.com/blog/2566-scope-watch-vs-watchcollection-in-angularjs.htm
+
+http://www.funnyant.com/angularjs-ui-router/

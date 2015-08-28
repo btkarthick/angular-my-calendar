@@ -1,16 +1,27 @@
-	<li class="inactive"><a href="#">1</a></li>					
-	<li><a href="#">2</a></li>					
-	<li><a href="#">3</a></li>					
-	<li><a href="#">4</a></li>					
-	<li><a href="#">5</a></li>					
-	<li><a href="#">6</a></li>					
-	<li><a href="#">7</a></li>					
-	<li><a href="#">8</a></li>					
-	<li class="inactive"><a href="#">8</a></li>					
-	<li><a href="#">10</a></li>					
-	<li><a href="#">11</a></li>					
-	<li><a href="#">12</a></li>					
-	<li><a href="#">13</a></li>					
-	<li class="inactive"><a href="#">14</a></li>
+	<li data-ng-class="{inactive : days.state == 'I'}" data-ng-repeat="days in cal.calendar">
+	
+		<a>{{ days.daynum }}</a>
+		
+		<div class="cal-events-wrapper">
 
-{{ cal.myname }}
+			<div class="cal-events clearfix" data-ng-repeat="eve in days.events | limitTo: cal.eventsPerCell">
+				<span style="background-color: {{ eve.Color }};"></span>
+				<span data-ng-bind="eve.Title" ></span>
+			</div>
+			
+		</div>
+		
+		<i class="glyphicon glyphicon-plus" data-ng-if="days.events.length > cal.eventsPerCell"></i>
+		
+	</li>
+	
+
+<!--<div class="cal-events clearfix">
+		<span></span>
+		<span>This is for testing</span>
+	</div>
+
+	<div class="cal-events clearfix">
+		<span style="background-color: #FF00FF;"></span>
+		<span>This is for testing</span>
+	</div>-->
