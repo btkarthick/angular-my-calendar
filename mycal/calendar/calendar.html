@@ -1,27 +1,53 @@
-	<li data-ng-class="{inactive : days.state == 'I'}" data-ng-repeat="days in cal.calendar">
-	
-		<a>{{ days.daynum }}</a>
-		
-		<div class="cal-events-wrapper">
+<div class="sb-wrapper">
+<!--<div class="checkbox checkbox-mycal">
+	<input type="checkbox" id="cat-sel-all" name="cat-sel-all">
+	<label for="cat-sel-all"> Select All </label>
+</div>-->
 
-			<div class="cal-events clearfix" data-ng-repeat="eve in days.events | limitTo: cal.eventsPerCell">
-				<span style="background-color: {{ eve.Color }};"></span>
-				<span data-ng-bind="eve.Title" ></span>
+	<ul class="sb-list" data-ng-show="cal.eventslist.length > 0">
+	
+		<li>
+			<div class="checkbox checkbox-mycal">
+				<input type="checkbox" id="cat-sel-all" name="cat-sel-all">
+				<label for="cat-sel-all"> Select All </label>
 			</div>
-			
-		</div>
-		
-		<i class="glyphicon glyphicon-plus" data-ng-if="days.events.length > cal.eventsPerCell"></i>
-		
-	</li>
+		</li>
+
+		<ng-include src="'mycal/calendar/categories.list.html'"></ng-include>
+	</ul>
+</div>
+
+<div class="cal-wrapper clearfix">
+
+	<ul class="cal-weekdays">
+		<li>Sun</li>
+		<li>Mon</li>
+		<li>Tue</li>
+		<li>Wed</li>
+		<li>Thu</li>
+		<li>Fri</li>
+		<li>Sat</li>
+	</ul>
+
+	<ul class="cal-daycells clearfix">
+
+		<li data-ng-class="{inactive : days.state == 'I'}" data-ng-repeat="days in cal.calendar">
+
+			<a>{{ days.daynum }}</a>
+
+			<div class="cal-events-wrapper">
+				<div class="cal-events clearfix" data-ng-repeat="eve in days.events | limitTo: cal.eventsPerCell">
+					<span style="background-color: {{ eve.Color }};"></span>
+					<span data-ng-bind="eve.Title" ></span>
+				</div>
+			</div>
+			<i class="glyphicon glyphicon-plus" data-ng-if="days.events.length > cal.eventsPerCell"></i>
+		</li>			
+
+	</ul>
 	
-
-<!--<div class="cal-events clearfix">
-		<span></span>
-		<span>This is for testing</span>
-	</div>
-
-	<div class="cal-events clearfix">
-		<span style="background-color: #FF00FF;"></span>
-		<span>This is for testing</span>
-	</div>-->
+	<!--<textarea name="" id="" cols="30" rows="10">
+		{{ cal.calendar }}
+	</textarea>-->
+	
+</div>

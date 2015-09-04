@@ -1,7 +1,7 @@
 
 <!--Previous button html-->
 
-<div class="menu-btn" data-ng-hide="!vm.prevNextMonth.previous.isHidden">
+<div class="menu-btn" data-ng-hide="!vm.prevNextMonth.previous.isHidden" data-ng-cloak>
 	
 	<i class="glyphicon glyphicon-chevron-left left"></i>
 	{{vm.prevNextMonth.previous.text | limitTo:3 | uppercase}}

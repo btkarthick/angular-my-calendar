@@ -36,7 +36,7 @@
 		* @returns {Number}
 		*/
 		
-		var setYearChange = function(cval, pval){
+		/*var setYearChange = function(cval, pval){
 			
 			if(cval !== pval){
 				
@@ -46,7 +46,7 @@
 		};
 	
 		// End of User defined functions
-		$scope.$watch('modelMonthYear.year', setYearChange);
+		$scope.$watch('modelMonthYear.year', setYearChange);*/
 	};
 	
 	

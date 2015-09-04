@@ -15,7 +15,7 @@
     'use strict';
 		
 		
-	var CalendarController = function( $rootScope, $scope, $routeParams, calData){
+	var CalendarController = function($rootScope, $scope, calData){
 		
 		/* vm stand for viewmodel
 		 * used in place of $scope
@@ -34,6 +34,22 @@
 		
 		vm.eventsPerCell = 3;
 		
+		vm.setEventsCatToogle = function(evecat){
+			
+			if(!evecat.isEnabled){
+			
+				_.remove(calData.eventsTypeIDs, function(typeID){
+					
+					return (typeID === evecat.Guid);
+				});
+			}
+			
+			else{
+				calData.eventsTypeIDs.push(evecat.Guid);
+			}
+		
+		};
+		
 		/**
 		* @name doSomething
 		* @desc Does something awesome
@@ -45,17 +61,22 @@
 		var setCalendarLoad = function(objNew, objOld){
 						
 			if(objNew != objOld){
-							
-				vm.calendar = calData.getCalDataByMonth();
-				//vm.calendar = calData.getMonthByIndex(objNew.month);
+			
+				if( objNew.year!== objOld.year ) {	getCalData(); }
+				
+				else{ vm.calendar = calData.getCalDataByMonth(); }
 			}
 			
 		};
 				
 		var calDataSuccess = function(resData){
 			
-			//vm.calendar = calData.getMonthByIndex(vm.currentMonthYear.month);
 			vm.calendar = calData.getCalDataByMonth();
+			
+			vm.eventslist = calData.dataTypeList;
+			
+			_.map(vm.eventslist, function(obj){ obj.isEnabled  = true; });
+	
 		};
 		
 		
@@ -75,7 +96,14 @@
 		
 		// Get calendar json on load
 		getCalData();
+		
 		$scope.$watchCollection( 'cal.currentMonthYear' , setCalendarLoad);
+		
+		$rootScope.$on( 'calData.eventsTypeIDs', function(oldArr, newArr){
+			
+			alert(oldArr);
+			
+		});
 					
 	};
 	
@@ -83,6 +111,6 @@
 		.module('mycal')
 		.controller('CalCtrl', CalendarController);
 	
-	CalendarController.$inject = [ '$rootScope' , '$scope', '$routeParams', 'calData'];
+	CalendarController.$inject = [ '$rootScope', '$scope', 'calData'];
 		
 })();

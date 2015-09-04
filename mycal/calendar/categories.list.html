@@ -1,0 +1,10 @@
+<li data-ng-repeat="category in cal.eventslist" data-events-types-on-off="" data-events-gid="{{category.Guid}}">
+	<div class="checkbox checkbox-mycal">
+		<input type="checkbox" id="eve-cat-{{$index}}" name="eve-cat-{{$index}}" data-ng-model="category.isEnabled" data-ng-change="cal.setEventsCatToogle(category)" />
+		<label for="eve-cat-{{$index}}">{{category.Name}}</label>
+		<span class="sb-indicator" data-ng-style="{backgroundColor : category.Color}"></span>
+	</div>
+</li>
+
+
+

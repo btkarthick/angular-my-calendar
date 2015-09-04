@@ -16,13 +16,13 @@
 	
 	var calendarDataFactory = function($http, $q){
 	
-		var FETCHURL 		= 'JSON/';
-		var objDate        	= new Date();
-		var dataMonthList  	= [];
-		var dataTypeList   	= [];
-		var dataEvents     	= [];
-				
-		var calMonthList = [ 
+		var FETCHURL 			= 'JSON/',
+			objDate        		= new Date(),
+			dataMonthList  		= [],
+			dataTypeList   		= [],
+			dataEvents     		= [],
+			eventsTypeIDs  	    = [],
+		 	calMonthList = [ 
 								{ monthname: 'January' , monthnum : 0 },
 								{ monthname: 'February' , monthnum : 1 },
 								{ monthname: 'March' , monthnum : 2 },
@@ -35,11 +35,10 @@
 								{ monthname: 'October' , monthnum : 9 },
 								{ monthname: 'November' , monthnum : 10 },
 								{ monthname: 'December' , monthnum : 11 }
-							];
+							],
 		
-		var calYearList = [2013, 2014, 2015, 2016, 2017];
-		
-		var calCurrentMonth = {};
+			calYearList = [2012, 2013, 2014, 2015, 2016, 2017],
+			calCurrentMonth = {};
 		
 		
 		var getCalDataByMonth = function(){
@@ -71,13 +70,27 @@
 										.first()
 					 
 					 					.compact()
-
+					 					 					
 										.value();
+				
+				
+					var filteredEvents = _.map(objEvents, function(eveObj){
+						
+											if(_.indexOf(calFactory.eventsTypeIDs, eveObj.EventTypeId) > -1)
+											{
+												return eveObj;		
+											}
+										});
 					 
-				calResults.push({ state : objDay.state , daynum : objDay.daynum, events :(objDay.state !== 'I') ? objEvents : [] }); 
-		
+				calResults.push({ 
+									state : objDay.state,
+									daynum : objDay.daynum,
+									events :(objDay.state !== 'I') ? filteredEvents : [] 
+								}); 
+			
 			});
 			
+						
 			 return calResults;			
 		};
 		
@@ -113,11 +126,19 @@
 			return { state : split[0] , daynum : split[1] };
 		};
 		
+		var getEventsTypeIDs = function(){
+			
+			return _.pluck(calFactory.dataTypeList, 'Guid');
+			
+		};
+		
 
 	// Ajax related functions	
 		
 		
 		var getCalDataByYear = function(cyear){
+			
+			cyear = (_.isUndefined(cyear)) ? calFactory.currentYear : cyear;
 			
 			return $http.get(FETCHURL + cyear.toString() + '.json')
 						.then(handleSuccess, handleError);
@@ -153,8 +174,8 @@
 			
 			calFactory.dataEvents = response.data.Output.events.year.Months;
 			
-			console.log(calFactory.dataTypeList);
-						 
+			calFactory.eventsTypeIDs = getEventsTypeIDs();
+			
 			return( response.data );
 
 		};
@@ -165,9 +186,7 @@
 		
 			currentMonth : objDate.getMonth(),
 			
-			/*currentYear : objDate.getFullYear(),*/
-			
-			currentYear : 2013,
+			currentYear : objDate.getFullYear(),
 			
 			fetchCalData : getCalDataByYear,
 			
@@ -183,7 +202,13 @@
 			
 			dataEvents : dataEvents,
 			
+			eventsTypeIDs : eventsTypeIDs,
+			
+			getEventsTypeIDs : getEventsTypeIDs,
+			
 			getCalDataByMonth : getCalDataByMonth
+			
+			
 		
 		};
 		

@@ -13,7 +13,7 @@
 	
 	'use strict';
 	
-	var setPrevNextButton = function($rootScope, $location, calData){
+	var setPrevNextButton = function( calData ){
 		
 		var prevNextController = function($scope){
 			
@@ -89,7 +89,7 @@
 		.module('mycal')
 		.directive('prevNextButton', setPrevNextButton);
 	
-	setPrevNextButton.$inject = ['$rootScope', '$location', 'calData' ];
+	setPrevNextButton.$inject = [ 'calData' ];
 	
 	
 })();
