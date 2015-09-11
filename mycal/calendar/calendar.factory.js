@@ -16,12 +16,13 @@
 	
 	var calendarDataFactory = function($http, $q){
 	
-		var FETCHURL 			= 'JSON/',
+		var FETCHURL 			= 'FakeJSON/',
 			objDate        		= new Date(),
 			dataMonthList  		= [],
 			dataTypeList   		= [],
 			dataEvents     		= [],
 			eventsTypeIDs  	    = [],
+			
 		 	calMonthList = [ 
 								{ monthname: 'January' , monthnum : 0 },
 								{ monthname: 'February' , monthnum : 1 },
@@ -39,7 +40,7 @@
 		
 			calYearList = [2012, 2013, 2014, 2015, 2016, 2017],
 			calCurrentMonth = {};
-		
+			
 		
 		var getCalDataByMonth = function(){
 		
@@ -47,51 +48,31 @@
 			
 			var monthText = getCurrentMonthText();
 			
-			var calDays = getMonthByIndex(calFactory.calCurrentMonth.month);
+			var calDays = calFactory.dataMonthList[monthText];
 			
-			var cMonthEvents = _.chain( calFactory.dataEvents )
+			var cMonthEvents = calFactory.dataEvents[monthText];
 			
-								.filter( { EventMonth : monthText } )
-			
-								.pluck('Days')
-					
-								.first()
-			
-								.value();
-			
+						
 			_.map( calDays, function(objDay){
 				
-					 var objEvents =   _.chain( cMonthEvents )
-					 				  
-					 					.filter( { EventDay: objDay.daynum } )
-					 
-					 					.pluck('Events')
-					 
-										.first()
-					 
-					 					.compact()
-					 					 					
-										.value();
-				
-				
-					var filteredEvents = _.map(objEvents, function(eveObj){
+					if(objDay.status === 'A')
+					{
+						var objEvents =  _.filter( cMonthEvents, { 'day' : _.parseInt(objDay.day) } );
+
+						objDay.events = objEvents;
 						
-											if(_.indexOf(calFactory.eventsTypeIDs, eveObj.EventTypeId) > -1)
-											{
-												return eveObj;		
-											}
-										});
-					 
-				calResults.push({ 
-									state : objDay.state,
-									daynum : objDay.daynum,
-									events :(objDay.state !== 'I') ? filteredEvents : [] 
-								}); 
+					}
+				
+					else{ objDay.events = []; }
+				
+					calResults.push(objDay);
+				
+				});
 			
-			});
-			
+			calFactory.currentCaldendarData = calResults;
 						
-			 return calResults;			
+			return calResults;	
+			
 		};
 		
 		
@@ -111,24 +92,24 @@
 		};
 		
 				
-		var getMonthByIndex = function(mindex){
+		/*var getMonthByIndex = function(mindex){
 			
 			var objMonth = calFactory.dataMonthList[mindex].Days.split(',');
 			
 			return(_.map(objMonth, splitMonthArray));
-		};
+		};*/
 		
 		
-		var splitMonthArray = function(n){
+		/*var splitMonthArray = function(n){
 			
 			var split = n.split('_');
 			
 			return { state : split[0] , daynum : split[1] };
-		};
+		};*/
 		
 		var getEventsTypeIDs = function(){
 			
-			return _.pluck(calFactory.dataTypeList, 'Guid');
+			return _.pluck(calFactory.dataTypeList, 'guid');
 			
 		};
 		
@@ -167,12 +148,13 @@
 	
 	
 		var handleSuccess = function( response ){
-
-			calFactory.dataMonthList = response.data.Output.monthlist;
-									
-			calFactory.dataTypeList = response.data.Output.eventtypelist;
 			
-			calFactory.dataEvents = response.data.Output.events.year.Months;
+			
+			calFactory.dataMonthList = response.data.calendar;
+									
+			calFactory.dataTypeList = response.data.categories;
+			
+			calFactory.dataEvents = response.data.events;
 			
 			calFactory.eventsTypeIDs = getEventsTypeIDs();
 			
@@ -207,14 +189,10 @@
 			getEventsTypeIDs : getEventsTypeIDs,
 			
 			getCalDataByMonth : getCalDataByMonth
-			
-			
-		
+	
 		};
 		
 		return calFactory;
-		
-		
 	};
 	
 	

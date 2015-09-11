@@ -8,7 +8,7 @@
 	
 		<li>
 			<div class="checkbox checkbox-mycal">
-				<input type="checkbox" id="cat-sel-all" name="cat-sel-all">
+				<input type="checkbox" id="cat-sel-all" name="cat-sel-all" data-ng-model="cal.eventsCatSelectAll" data-ng-change="cal.setEventsCatSelectAll();">
 				<label for="cat-sel-all"> Select All </label>
 			</div>
 		</li>
@@ -28,20 +28,24 @@
 		<li>Fri</li>
 		<li>Sat</li>
 	</ul>
+	
+	
 
 	<ul class="cal-daycells clearfix">
 
-		<li data-ng-class="{inactive : days.state == 'I'}" data-ng-repeat="days in cal.calendar">
+		<li data-ng-class="{inactive : days.status == 'I'}" data-ng-repeat="days in cal.calendar track by $index">
 
-			<a>{{ days.daynum }}</a>
+			<a>{{ days.day }}</a>
 
 			<div class="cal-events-wrapper">
-				<div class="cal-events clearfix" data-ng-repeat="eve in days.events | limitTo: cal.eventsPerCell">
-					<span style="background-color: {{ eve.Color }};"></span>
-					<span data-ng-bind="eve.Title" ></span>
+				<div class="cal-events clearfix" data-ng-repeat="eve in days.events | EventsByCatFilter:cal.typeIds | limitTo: cal.eventsPerCell track by $index ">
+					<span style="background-color: {{ eve.color }};"></span>
+					<span data-ng-bind="eve.title" ></span>
 				</div>
 			</div>
-			<i class="glyphicon glyphicon-plus" data-ng-if="days.events.length > cal.eventsPerCell"></i>
+			
+			<data-events-more-button data-ng-if="days.events.length > cal.eventsPerCell" data-allowed-events="{{ cal.eventsPerCell }}"></data-events-more-button>
+			
 		</li>			
 
 	</ul>

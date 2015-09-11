@@ -15,7 +15,7 @@
     'use strict';
 		
 		
-	var CalendarController = function($rootScope, $scope, calData){
+	var CalendarController = function($rootScope, $scope, $filter, calData){
 		
 		/* vm stand for viewmodel
 		 * used in place of $scope
@@ -24,30 +24,53 @@
 		
 		var vm = this;
 		
-		//vm.currentYear = (!resolveData) ? $routeParams.year : resolveData;
-
+		
 		vm.currentMonthYear = calData.calCurrentMonth;
 		
 		vm.calendar = '';
 		
 		vm.eventslist = '';
 		
-		vm.eventsPerCell = 3;
+		vm.typeIds = [];
+		
+		vm.eventsPerCell = 2;
+		
+		vm.eventsCatSelectAll = true;
+		
+		vm.setEventsCatSelectAll = function(){
+			
+			if(!vm.eventsCatSelectAll)
+			{
+				vm.typeIds.length = 0;
+			}
+			
+			else{
+				
+				vm.typeIds = calData.getEventsTypeIDs();
+			}
+			
+			_.map(vm.eventslist, function(obj){ obj.isEnabled  = vm.eventsCatSelectAll; });
+		}
+		
+		
 		
 		vm.setEventsCatToogle = function(evecat){
 			
 			if(!evecat.isEnabled){
 			
-				_.remove(calData.eventsTypeIDs, function(typeID){
+				_.remove(vm.typeIds, function(typeID){
 					
-					return (typeID === evecat.Guid);
+					return (typeID === evecat.guid);
 				});
 			}
 			
 			else{
-				calData.eventsTypeIDs.push(evecat.Guid);
+				vm.typeIds.push(evecat.guid);
 			}
-		
+			
+			var isAllChecked =  $filter('filter')( vm.eventslist, { isEnabled : false } ).length;
+			
+			vm.eventsCatSelectAll = (_.parseInt(isAllChecked) > 0) ? false : true;
 		};
 		
 		/**
@@ -75,8 +98,7 @@
 			
 			vm.eventslist = calData.dataTypeList;
 			
-			_.map(vm.eventslist, function(obj){ obj.isEnabled  = true; });
-	
+			vm.typeIds = calData.eventsTypeIDs;
 		};
 		
 		
@@ -98,19 +120,13 @@
 		getCalData();
 		
 		$scope.$watchCollection( 'cal.currentMonthYear' , setCalendarLoad);
-		
-		$rootScope.$on( 'calData.eventsTypeIDs', function(oldArr, newArr){
 			
-			alert(oldArr);
-			
-		});
-					
 	};
 	
 	angular
 		.module('mycal')
 		.controller('CalCtrl', CalendarController);
 	
-	CalendarController.$inject = [ '$rootScope', '$scope', 'calData'];
+	CalendarController.$inject = [ '$rootScope', '$scope', '$filter', 'calData'];
 		
 })();

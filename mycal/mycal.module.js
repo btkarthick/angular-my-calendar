@@ -44,7 +44,7 @@
 	/*Namming the app as mycal */
 		 
 	angular
-	 		.module('mycal', [ 'ngRoute' ])
+	 		.module('mycal', [ 'ngRoute', 'ui.bootstrap' ])
 	 		.config(routeConfig);			
 	
 	routeConfig.$inject = [ '$routeProvider', '$locationProvider' ];
